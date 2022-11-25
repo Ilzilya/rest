@@ -1,0 +1,142 @@
+﻿@*@model NavigationProperty.Models.Player*@
+@model rest.Models.Dish
+
+@{
+    ViewData["Title"] = "Добавление нового блюда";
+}
+
+<h2>Добавление нового блюда</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Блюдо</legend>
+
+        <p>
+            Название блюда <br />
+            @Html.EditorFor(model => model.Name)
+        </p>
+
+        <p>
+            Описание <br />
+            @Html.EditorFor(model => model.Description)
+        </p>
+
+        <p>
+            Каллорийность <br />
+            @Html.EditorFor(model => model.Kkal)
+        </p>
+        <p>
+            Технология приготовления <br />
+            @Html.EditorFor(model => model.Cook_tech)
+        </p>
+        <p>
+            Стоимость <br />
+            @Html.EditorFor(model => model.Price)
+        </p>
+        <p>
+            Добавить в меню? <br />
+            @Html.EditorFor(model => model.Menu)
+        </p>
+        <p>
+            Путь до картинки блюда <br />
+            @Html.EditorFor(model => model.Img)
+        </p>
+        <p>
+            Порция (вес, размер...) <br />
+            @Html.EditorFor(model => model.Portion)
+        </p>
+        <p>
+            Вес <br />
+            @Html.EditorFor(model => model.Weight)
+        </p>
+        <p>
+            Категория <br />
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.Categories as SelectList)
+        </p>
+        <div class="editor-label">
+        <b>Ингредиенты</b></div>
+            @foreach (Ingred c in ViewBag.Ingreds)
+            {
+                <input type="checkbox" name="selectedIng" value="@c.Id") />
+                @c.Name
+                <input type="number" name="Amt" value="0"/>
+                 @(((List<Unit>)ViewBag.Unit).Find(x => x.Id == c.UnitId).Name)
+                    <br />
+            }
+        <p>
+            <input type="submit" value="Добавить блюдо" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("К списку блюд", "Index")
+</div>
+
+@*
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kkal" class="control-label"></label>
+                <input asp-for="Kkal" class="form-control" />
+                <span asp-validation-for="Kkal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cook_tech" class="control-label"></label>
+                <input asp-for="Cook_tech" class="form-control" />
+                <span asp-validation-for="Cook_tech" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Menu" /> @Html.DisplayNameFor(model => model.Menu)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Img" class="control-label"></label>
+                <input asp-for="Img" class="form-control" />
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Portion" class="control-label"></label>
+                <input asp-for="Portion" class="form-control" />
+                <span asp-validation-for="Portion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(model => model.CategoryId, ViewBag.Categories as SelectList)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
